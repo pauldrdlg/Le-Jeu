@@ -6,10 +6,11 @@ public class Playermouvement : MonoBehaviour
 {
     private bool facingRight = true;
 
-    public float moveSpeed = 5f;
-    public float jumpForce = 10f;
-    public float dashForce = 5f;
+    public float moveSpeed = 15f;
+    public float jumpForce = 25f;
+    public float dashForce = 30f;
     public bool isGrounded = false;
+    public bool alreadyDash = false;
 
     private float jumpTimer;
     public float jumpTime;
@@ -38,7 +39,7 @@ public class Playermouvement : MonoBehaviour
             else
             {
                 gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
-                gameObject.GetComponent<Rigidbody2D>().gravityScale = 5;
+                gameObject.GetComponent<Rigidbody2D>().gravityScale = 9;
                 isDashing = false;
             }
         }
@@ -83,7 +84,7 @@ public class Playermouvement : MonoBehaviour
 
     void Dash()
     {
-        if (Input.GetButtonDown("Dash"))
+        if (Input.GetButtonDown("Dash") && isDashing == false && alreadyDash == false)
         {
             isDashing = true;
             dashTimer = dashTime;
@@ -96,6 +97,14 @@ public class Playermouvement : MonoBehaviour
                 gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(-dashForce, 0f);
             }
             gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
+            if (isGrounded == false)
+            {
+                alreadyDash = true;
+            }
+        }
+        if (isGrounded == true)
+        {
+            alreadyDash = false;
         }
     }
 
