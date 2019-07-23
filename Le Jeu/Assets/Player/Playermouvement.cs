@@ -7,7 +7,7 @@ public class Playermouvement : MonoBehaviour
     private bool facingRight = true;
 
     public float moveSpeed = 15f;
-    public float jumpForce = 25f;
+    public float jumpForce = 20f;
     public float dashForce = 30f;
     public bool isGrounded = false;
     public bool alreadyDash = false;
