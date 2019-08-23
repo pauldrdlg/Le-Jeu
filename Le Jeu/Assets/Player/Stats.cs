@@ -35,7 +35,7 @@ public class Stats : MonoBehaviour
     {
         if (collision.tag == "CheckPoint")
         {
-            if (Input.GetKeyDown(KeyCode.Q))
+            if (Input.GetKey(KeyCode.Q))
             {
                 checkPoint = collision.transform.position;
             }
