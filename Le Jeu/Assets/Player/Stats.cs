@@ -26,44 +26,21 @@ public class Stats : MonoBehaviour
         Debug.Log(checkPoint);
         if(hydratation <= 0)
         {
-            if (activated == true)
-            {
-                transform.position = checkPoint;
-                hydratation = 100;
-            }
-            else
-            {
-                //Default respawn
-                transform.position = new Vector3(0, 4, 6f);
-                hydratation = 100;
-            }
-        }
-
-        if (Input.GetKeyDown(KeyCode.Q) && inRanged == true)
-        {
-            activated = true;
+            transform.position = checkPoint;
+            hydratation = 100;
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.tag == "CheckPoint")
         {
-            inRanged = true;
-            if(activated == false)
+            if (Input.GetKeyDown(KeyCode.Q))
             {
                 checkPoint = collision.transform.position;
             }
         }
     }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.tag == "CheckPoint")
-        {
-            inRanged = false;
-        }
-    } 
 
     void Deshydratation()
     {
