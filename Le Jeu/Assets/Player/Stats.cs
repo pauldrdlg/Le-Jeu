@@ -17,7 +17,7 @@ public class Stats : MonoBehaviour
     {
         Player = gameObject.transform.gameObject;
         hydratation = 100;
-        InvokeRepeating("Deshydratation",0f, 1.0f);
+        //InvokeRepeating("Deshydratation",0f, 1.0f);
         //Total de 15 minutes avant la deshydratation du perso
     }
 
@@ -28,6 +28,11 @@ public class Stats : MonoBehaviour
         {
             transform.position = checkPoint;
             hydratation = 100;
+        }
+
+        if (Input.GetKey(KeyCode.O))
+        {
+            hydratation = 0;
         }
     }
 
@@ -40,6 +45,11 @@ public class Stats : MonoBehaviour
                 checkPoint = collision.transform.position;
             }
         }
+
+        if (collision.tag == "Mob")
+        {
+            takeDmg(collision.GetComponent<MobStats>().dmg);
+        }
     }
 
     void Deshydratation()
@@ -47,5 +57,10 @@ public class Stats : MonoBehaviour
         //hydratation -= 0.12f;
         // pour faire un test de 10 sec // hydratation -= 10;
         hydratation -= 10;
+    }
+
+    public void takeDmg(int dmg)
+    {
+        hydratation -= dmg;
     }
 }
